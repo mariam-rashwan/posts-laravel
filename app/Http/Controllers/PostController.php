@@ -14,9 +14,12 @@ class PostController extends Controller
 
         //   dd($allPosts); 
 
-        return view('posts.index', compact('posts'),[
-            'allPosts' => $allPosts
-        ]);
+        // return view('posts.index', compact('posts'),[
+        //     'allPosts' => $allPosts
+        // ]);
+        // dd(compact('allPosts'));
+        return view('posts.index',compact('allPosts'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
       public function create()
     {
@@ -42,17 +45,17 @@ class PostController extends Controller
             'user_id' => $data['post_creator'],
         ]);
         return redirect()->route('posts.index')->
-        with('success','Product created successfully.');
+        with('success','Posts created successfully.');
  
 
     }
-    public function show(Post $post)
+    public function show(Post $post )
     {
 
         //query in db select * from posts where id = $postId
-    //  $allPosts=Post::find($id);
-    return view('posts.show', compact('post') );
-    // ->with('allPosts',$allPosts);
+     $allPosts=Post::find($id);
+    return view('posts.show')
+    ->with('allPosts',$allPosts);
 
     }
 
@@ -61,7 +64,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('posts.edit',compact('post'));
+        return view('posts.edit',compact('Posts'));
+
 
         // $allPosts=Post::find($id);
         // return view('posts.edit')->with('allPosts',$allPosts);
@@ -103,7 +107,7 @@ class PostController extends Controller
         'user_id' => $data['post_creator'],
     ]);
     return redirect()->route('posts.index')->
-    with('success','Product created successfully.');
+    with('success','Posts created successfully.');
 }
 
 
@@ -119,7 +123,7 @@ public function destroy(post $post)
     $post->delete();
 
     return redirect()->route('posts.index')
-        ->with('success','Product deleted successfully');
+        ->with('success','Posts deleted successfully');
 }
 
 

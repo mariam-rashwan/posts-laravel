@@ -21,19 +21,18 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
-                {{-- @dd($post->created_at) carbon object --}}
                 <td>{{ $post->created_at }}</td>
                 <td>
-                <td>
              
-                <form action="{{ route('posts.destroy',$post>id) }}" method="POST">
-                    <a href="{{ route('posts.index' , $post->id) }}" class="btn btn-info text-light">View</a>
-                    <a href="{{ route('posts.update',$post->id)}}" class="btn btn-primary">Edit</a>
+                <form action="{{ route('posts.destroy',$post->id) }}" method="post">
+                @csrf
+                    @method('DELETE')
+                    <a href="{{ route('posts.show' , $post->id) }}" class="btn btn-info text-light">View</a>
+                    <a href="{{ route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
 
                     <button type="submit" class="btn btn-danger">Delete</button>
                     </form>                  
-                      @csrf
-                    @method('DELETE')
+                   
                 </td>
               </tr>
               @endforeach
