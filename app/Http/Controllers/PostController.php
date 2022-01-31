@@ -52,10 +52,11 @@ class PostController extends Controller
     public function show(Post $post )
     {
 
-        //query in db select * from posts where id = $postId
-     $allPosts=Post::find($id);
-    return view('posts.show')
-    ->with('allPosts',$allPosts);
+    
+     //query in db select * from posts where id = $postId
+    //  $allPosts=Post::find($id);
+    return view('posts.show',compact('post'));
+    // ->with('allPosts',$allPosts);
 
     }
 
@@ -64,7 +65,11 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('posts.edit',compact('Posts'));
+        $users = User::all();
+
+        return view('posts.edit',compact('post'),[
+            'users' => $users
+        ]);
 
 
         // $allPosts=Post::find($id);
@@ -89,26 +94,33 @@ class PostController extends Controller
  
     // }
 
-    public function update(Request $request, Post $post)
+
+    public function update(Request $request,Post $post)
 {
-    // $data    = $request->user();
+  
+    // $data= request()->all();
+    // // dd($data);
 
-    // $allPosts= $data->customers()->find($postId);
-    // $allPosts->update($request->all());
+    // Post::update([
+    //     'title' => $data['title'],
+    //     'description' => $data['description'],
+    //     'user_id' => $data['post_creator'],
+    // ]);
+    // return redirect()->route('posts.index')->
+    // with('success','Posts created successfully.');
 
-    // return redirect()->route('posts.index');
-
-    $data= request()->all();
-    // dd($data);
-
-    Post::update([
-        'title' => $data['title'],
-        'description' => $data['description'],
-        'user_id' => $data['post_creator'],
+    $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'user_id' => 'required',
     ]);
-    return redirect()->route('posts.index')->
-    with('success','Posts created successfully.');
+
+    $post->update($request->all());
+
+    return redirect()->route('posts.index')
+        ->with('success','Product updated successfully');
 }
+
 
 
 public function destroy(post $post)
@@ -128,3 +140,6 @@ public function destroy(post $post)
 
 
 }
+
+
+

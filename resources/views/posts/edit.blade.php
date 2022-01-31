@@ -4,12 +4,12 @@
 
 @section('content')
 
-        <form method="put" action="{{route('posts.update',$post->id) }}" >
+        <form method="post" action="{{route('posts.update',$post->id) }}" >
             @csrf
             @method('PUT')
 
             <div class="mb-3">
-            <input type="text" class="form-control" id="exampleFormControlInput1" >
+            <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$post->id}}">
 
                 <label for="exampleFormControlInput1" class="form-label">Title</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$post->title}}" >
@@ -22,9 +22,10 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-                <select class="form-control">
-                    <option value="1">ahmed</option>
-                    <option value="2">mohamed</option>
+                  <select name="post_creator" class="form-control">
+                    @foreach ($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
                 </select>
             </div>
             
