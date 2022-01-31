@@ -18,10 +18,12 @@
             <tbody>
              @foreach ($allPosts as $post)
               <tr>
-                <th scope="row">1</th>
-                <td>{{ $post['title'] }}</td>
-                <td>{{ $post['posted_by'] }}</td>
-                <td>{{ $post['created_at'] }}</td>
+                <th scope="row">{{ $post->id }}</th>
+                <td>{{ $post->title }}</td>
+                <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
+                {{-- @dd($post->created_at) carbon object --}}
+                <td>{{ $post->created_at }}</td>
+                <td>
                 <td>
                     <a href="{{ route('posts.index') }}" class="btn btn-info text-light">View</a>
                     <a href="{{ route('posts.edit') }}" class="btn btn-primary">Edit</a>

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User; 
+use  App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = [
-            ['title' => 'First Post', 'posted_by'=> 'Ahmed', 'created_at' => '2022-01-20'],
-            ['title' => 'Second Post', 'posted_by'=> 'Mohamed', 'created_at' => '2022-01-20'],
-            ['title' => 'Third Post', 'posted_by'=> 'Ali', 'created_at' => '2022-01-20'],
-        ];
+        $allPosts =Post::all();
+
+        //   dd($allPosts); 
 
         return view('posts.index', [
             'allPosts' => $allPosts
@@ -20,12 +20,27 @@ class PostController extends Controller
     }
       public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+
+        return view('posts.create',[
+            'users' => $users
+        ]);
+       
     }
 
     public function store()
     {
+        // dd('hmmm');
         // return 'ok';
+
+        $data= request()->all();
+        // dd($data);
+
+        Post::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => $data['post_creator'],
+        ]);
         return redirect()->route('posts.index');
  
 
