@@ -14,7 +14,7 @@ class PostController extends Controller
 
         //   dd($allPosts); 
 
-        return view('posts.index', [
+        return view('posts.index', compact('posts'),[
             'allPosts' => $allPosts
         ]);
     }
@@ -41,19 +41,86 @@ class PostController extends Controller
             'description' => $data['description'],
             'user_id' => $data['post_creator'],
         ]);
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->
+        with('success','Product created successfully.');
  
 
     }
-    public function show($postId)
+    public function show(Post $post)
     {
+
         //query in db select * from posts where id = $postId
-        return $postId;
+    //  $allPosts=Post::find($id);
+    return view('posts.show', compact('post') );
+    // ->with('allPosts',$allPosts);
+
     }
 
-    public function edit()
+   
+
+
+    public function edit(Post $post)
     {
-        return view('posts.edit');
+        return view('posts.edit',compact('post'));
+
+        // $allPosts=Post::find($id);
+        // return view('posts.edit')->with('allPosts',$allPosts);
+    
+      
     }
+
+    // public function update($id)
+    // {
+    //  $allPosts=Post::find($id);
+
+    //     $data= request()->all();
+    //     // dd($data);
+
+    //     Post::create([
+    //         'title' => $data['title'],
+    //         'description' => $data['description'],
+    //         'user_id' => $data['post_creator'],
+    //     ]);
+    //     return redirect()->route('posts.index');
+ 
+    // }
+
+    public function update(Request $request, Post $post)
+{
+    // $data    = $request->user();
+
+    // $allPosts= $data->customers()->find($postId);
+    // $allPosts->update($request->all());
+
+    // return redirect()->route('posts.index');
+
+    $data= request()->all();
+    // dd($data);
+
+    Post::update([
+        'title' => $data['title'],
+        'description' => $data['description'],
+        'user_id' => $data['post_creator'],
+    ]);
+    return redirect()->route('posts.index')->
+    with('success','Product created successfully.');
+}
+
+
+public function destroy(post $post)
+{
+    // $data    = $request->user();
+
+    // $allPosts= $data->customers()->find($postId);
+    // $allPosts->delete();
+
+    // return redirect()->route('posts.index');
+
+    $post->delete();
+
+    return redirect()->route('posts.index')
+        ->with('success','Product deleted successfully');
+}
+
 
 }
