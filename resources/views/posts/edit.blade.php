@@ -9,15 +9,15 @@
             @method('PUT')
 
             <div class="mb-3">
-            <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$post->id}}">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="id" value="{{$post->id}}">
 
                 <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$post->title}}" >
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{$post->title}}" >
             </div>
             
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"> {{$post->description}} </textarea>  
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"> {{$post->description}} </textarea>  
             </div>
 
             <div class="mb-3">

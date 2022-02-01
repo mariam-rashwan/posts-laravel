@@ -7,6 +7,8 @@ use  App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\postRequest;
+use App\Http\Requests\postRequestUpdate;
+
 
 class PostController extends Controller
 {
@@ -77,7 +79,7 @@ class PostController extends Controller
         // $data=post::where('id',$postId)->get(); 
         $post=Post::find($postId);
         return view('posts.edit',[
-            'data' => $data,
+            'post' => $post,
             'users' => $users
         ]);    
       
@@ -100,7 +102,7 @@ class PostController extends Controller
     // }
 
 
-    public function update(postRequest $request,Post $post)
+    public function update(Request $request,Post $post)
 {
   
     // $data= request()->all();
@@ -117,7 +119,7 @@ class PostController extends Controller
     $allPosts= request()->all();
 
         $post->update($allPosts);
-    
+   
         // $post->update($request->all());
 
         return redirect()->route('posts.index')

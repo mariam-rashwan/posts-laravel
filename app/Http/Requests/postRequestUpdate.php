@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class postRequest extends FormRequest
+class postRequestUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class postRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,12 @@ class postRequest extends FormRequest
     public function rules()
     {
         return [
-            request()->validate([
-                'title' => ['required', 'min:3' ,'unique'],
-                'description' => ['required', 'min:10'],
-            ])
-            
-        ];
+         
+                request()->validate([
+                    'title' => ['min:3'],
+                    'description' => ['required', 'min:10'],
+                ])
+                ];
+        
     }
 }
