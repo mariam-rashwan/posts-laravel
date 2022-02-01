@@ -68,11 +68,13 @@ class PostController extends Controller
    
 
 
-    public function edit(Post $post)
+    public function edit($postId)
     {
         $users = User::all();
 
-        return view('posts.edit',compact('post'),[
+        $data=post::where('id',$postId)->get(); 
+        return view('posts.edit',[
+            'data' => $data,
             'users' => $users
         ]);
 
@@ -114,16 +116,17 @@ class PostController extends Controller
     // return redirect()->route('posts.index')->
     // with('success','Posts created successfully.');
 
-    $request->validate([
-        'title' => 'required',
-        'description' => 'required',
-        'user_id' => 'required',
-    ]);
+    $allPosts= request()->all();
 
-    $post->update($request->all());
+        $post->update($allPosts);
+    
+        // $post->update($request->all());
 
-    return redirect()->route('posts.index')
-    ->with('success','Product updated successfully');
+        return redirect()->route('posts.index')
+        ->with('success','Product updated successfully');
+    
+
+
 
 
     

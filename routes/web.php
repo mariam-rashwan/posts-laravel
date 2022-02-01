@@ -40,4 +40,3 @@ Route::get('/posts/{postId}', [PostController::class, 'show'])->name('posts.show
 
 
 
-
