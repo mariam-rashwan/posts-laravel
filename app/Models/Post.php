@@ -25,5 +25,6 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+protected $appends = ['id', 'user_id']; 
 
 }

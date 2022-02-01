@@ -102,7 +102,7 @@ class PostController extends Controller
     // }
 
 
-    public function update(Request $request,Post $post)
+    public function update( postRequestUpdate $request,Post $post)
 {
   
     // $data= request()->all();
