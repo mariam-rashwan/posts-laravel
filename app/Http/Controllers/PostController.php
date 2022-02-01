@@ -123,7 +123,10 @@ class PostController extends Controller
     $post->update($request->all());
 
     return redirect()->route('posts.index')
-        ->with('success','Product updated successfully');
+    ->with('success','Product updated successfully');
+
+
+    
 }
 
 
