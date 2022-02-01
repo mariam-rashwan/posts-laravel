@@ -4,6 +4,13 @@
 
 @section('content')
 
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to delete this"))
+      event.preventDefault();
+  }
+ </script>
+
         <br>
         <table class="table">
             <thead>
@@ -30,7 +37,7 @@
                     <a href="{{ route('posts.show' , $post->id) }}" class="btn btn-info text-light">View</a>
                     <a href="{{ route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
 
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" onclick="return myFunction();">Delete</button>
                     </form>                  
                    
                 </td>
