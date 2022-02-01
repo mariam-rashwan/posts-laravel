@@ -4,32 +4,36 @@
 
 @section('content')
 
-        <div class="container" >
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Title:</strong>
-                {{$post->title}}
-            </div>
-        </div>
 
+<div class="container" >
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>description:</strong>
-                {{$post->description}}
-            </div>
-        </div>
-            
+  <h2>Data show </h2>
+  <div class="row">
 
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-                <select class="form-control">
-                    <option value="1">ahmed</option>
-                    <option value="2">mohamed</option>
-                </select>
-            </div>
-            
+  <table class="table">
+
+        <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Posted By</th>
+                <th scope="col">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+      <tr>
+          <td> {{$post->id}}</td>
+             <td>  {{$post->title}}</td>
+       
+              <td>  {{$post->description}} </td>
+
+             <td> {{$post->user->name}}</td>
+
+             <td> {{$post->created_at}}</td>
+
+</tbody>
+</table>
+</div>          
 </div>
 @endsection

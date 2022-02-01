@@ -24,7 +24,7 @@
                 <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
                   <select name="post_creator" class="form-control">
                     @foreach ($users as $user)
-                        <option value="{{$user->id}}">{{$user->name}}</option>
+                        <option value="{{$post->user->name}}">{{$user->name}}</option>
                     @endforeach
                 </select>
             </div>
