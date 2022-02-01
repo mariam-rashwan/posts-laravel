@@ -6,7 +6,7 @@ use App\Models\User;
 use  App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\postRequest;
 
 class PostController extends Controller
 {
@@ -36,10 +36,12 @@ class PostController extends Controller
        
     }
 
-    public function store()
+    public function store(postRequest $request)
     {
         // dd('hmmm');
         // return 'ok';
+
+            
 
         $data= request()->all();
         // dd($data);
@@ -72,16 +74,12 @@ class PostController extends Controller
     {
         $users = User::all();
 
-        $data=post::where('id',$postId)->get(); 
+        // $data=post::where('id',$postId)->get(); 
+        $post=Post::find($postId);
         return view('posts.edit',[
             'data' => $data,
             'users' => $users
-        ]);
-
-
-        // $allPosts=Post::find($id);
-        // return view('posts.edit')->with('allPosts',$allPosts);
-    
+        ]);    
       
     }
 
@@ -102,7 +100,7 @@ class PostController extends Controller
     // }
 
 
-    public function update(Request $request,Post $post)
+    public function update(postRequest $request,Post $post)
 {
   
     // $data= request()->all();
