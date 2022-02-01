@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User; 
 use  App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
     public function index()
     {
         $allPosts =Post::all();
+        // $allPosts =Post::paginate(5);
+
 
         //   dd($allPosts); 
 
@@ -19,7 +23,8 @@ class PostController extends Controller
         // ]);
         // dd(compact('allPosts'));
         return view('posts.index',compact('allPosts'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('allPosts', post::paginate(6));
+            
     }
       public function create()
     {

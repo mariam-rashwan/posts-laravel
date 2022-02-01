@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
+
     public function getCreatedAtAttribute($value){
         return Carbon::now()->format('Y-m-d H:i:s');
         
