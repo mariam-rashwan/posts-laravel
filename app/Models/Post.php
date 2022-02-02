@@ -4,7 +4,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 
 class Post extends Model
@@ -15,14 +15,12 @@ class Post extends Model
 //         return Carbon::now()->format('Y-m-d H:i:s');
         
 //   }
-// use Sluggable;
 
-
-    use HasFactory;
+    use HasFactory ,Sluggable;
 
     protected $fillable=[
         
-    'title','description', 'user_id', 
+    'title','slug','description', 'user_id', 
     ];
 
 public function user()
@@ -31,14 +29,14 @@ public function user()
 }
 
 
-// public function sluggable(): array
-// {
-//     return [
-//         'slug' => [
-//             'source' => 'title'
-//         ]
-//     ];
-// }
+public function sluggable(): array
+{
+    return [
+        'slug' => [
+            'source' => 'title'
+        ]
+    ];
+}
 
 
 }

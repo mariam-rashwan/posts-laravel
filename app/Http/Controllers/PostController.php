@@ -43,7 +43,7 @@ class PostController extends Controller
         // dd('hmmm');
         // return 'ok';
 
-            
+
 
         $data= $request->all();
         // dd($data);
