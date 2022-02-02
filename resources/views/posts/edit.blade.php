@@ -20,11 +20,13 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"> {{$post->description}} </textarea>  
             </div>
 
+     
+
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
+                <label for="exampleFormControlTextarea1" class="form-label">Post Edit</label>
                   <select name="post_creator" class="form-control">
                     @foreach ($users as $user)
-                        <option value="{{$user->name}}">{{$user->name}}</option>
+                        <option value="{{$user->id}}" @if($user->id ==  $post->user_id) selected @endif >{{$user->name}}</option>
                     @endforeach
                 </select>
             </div>

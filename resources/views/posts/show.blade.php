@@ -30,7 +30,7 @@
 
              <td> {{$post->user->name}}</td>
 
-             <td> {{$post->created_at}}</td>
+             <td> {{$post->created_at->format('Y-m-d H:i:s')}}</td>
 
 </tbody>
 </table>

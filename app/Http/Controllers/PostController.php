@@ -102,23 +102,23 @@ class PostController extends Controller
     // }
 
 
-    public function update(postRequestUpdate $request,Post $post)
+    public function update(postRequestUpdate $request,$post)
 {
   
     // $data= request()->all();
     // // dd($data);
 
-    // Post::update([
-    //     'title' => $data['title'],
-    //     'description' => $data['description'],
-    //     'user_id' => $data['post_creator'],
-    // ]);
-    // return redirect()->route('posts.index')->
-    // with('success','Posts created successfully.');
+    $allPosts= Post::findOrFail($post);
 
-    $allPosts= $request->all();
+    $allPosts->update([
+        'title' => $request -> title,
+        'description' => $request ->description,
+        'user_id' => $request -> post_creator,
+    ]);
+    
+    // $allPosts= $request->all();
 
-        $post->update($allPosts);
+        // $post->update($allPosts);
    
         // $post->update($request->all());
 

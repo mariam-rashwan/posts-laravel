@@ -28,7 +28,7 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
-                <td>{{ $post->created_at }}</td>
+                <td>{{ $post->created_at->format('Y-m-d H:i:s') }}</td>
                 <td>
              
                 <form action="{{ route('posts.destroy',$post->id) }}" method="post">

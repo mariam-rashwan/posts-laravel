@@ -9,10 +9,10 @@ class Post extends Model
 {
 
 
-    public function getCreatedAtAttribute($value){
-        return Carbon::now()->format('Y-m-d H:i:s');
+//     public function getCreatedAtAttribute($value){
+//         return Carbon::now()->format('Y-m-d H:i:s');
         
-  }
+//   }
 
     use HasFactory;
 
@@ -25,6 +25,5 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
-protected $appends = ['id', 'user_id']; 
 
 }
