@@ -58,18 +58,28 @@ class PostController extends Controller
  
 
     }
-    public function show(Post $post )
+    public function show($slug)
     {
 
     
-     //query in db select * from posts where id = $postId
-    //  $allPosts=Post::find($id);
-    return view('posts.show',compact('post'));
-    // ->with('allPosts',$allPosts);
+    //  //query in db select * from posts where id = $postId
+    // //  $allPosts=Post::find($id);
+
+    $post = Post::where('slug', $slug)->get();
+    return view('posts.show',['post'=>$post]);
+
+
+    // return view('posts.show',compact('post'));
+
+
+    
+    // // ->with('allPosts',$allPosts);
 
     }
 
-   
+
+
+
 
 
     public function edit($postId)

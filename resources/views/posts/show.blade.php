@@ -16,22 +16,31 @@
               <tr>
                 <th scope="col">id</th>
                 <th scope="col">Title</th>
+                <th scope="col">Slug</th>
+
                 <th scope="col">Description</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
               </tr>
             </thead>
+         
             <tbody>
+            <tbody>
+
+              @foreach($post as $data)
       <tr>
-          <td> {{$post->id}}</td>
-             <td>  {{$post->title}}</td>
-       
-              <td>  {{$post->description}} </td>
+          <td> {{$data->id}}</td>
+             <td>  {{$data->title}}</td>
 
-             <td> {{$post->user->name}}</td>
+             <td>  {{$data->slug}}</td>
 
-             <td> {{$post->created_at->format('Y-m-d H:i:s')}}</td>
+              <td>  {{$data->description}} </td>
 
+             <td> {{$data->user->name}}</td>
+
+             <td> {{$data->created_at->format('Y-m-d H:i:s')}}</td>
+</tr>
+@endforeach
 </tbody>
 </table>
 </div>          
