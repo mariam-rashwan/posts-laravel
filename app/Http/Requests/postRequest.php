@@ -25,8 +25,8 @@ class postRequest extends FormRequest
     {
         return [
             request()->validate([
-                'title' => ['required', 'min:3' ,'unique'],
-                'description' => ['required', 'min:10'],
+                'title' => ['required','min:3','unique:posts'],
+                'description' => ['required',' min:10'],
             ])
             
         ];

@@ -45,7 +45,7 @@ class PostController extends Controller
 
             
 
-        $data= request()->all();
+        $data= $request->all();
         // dd($data);
 
         Post::create([
@@ -102,7 +102,7 @@ class PostController extends Controller
     // }
 
 
-    public function update( postRequestUpdate $request,Post $post)
+    public function update(postRequestUpdate $request,Post $post)
 {
   
     // $data= request()->all();
@@ -116,14 +116,14 @@ class PostController extends Controller
     // return redirect()->route('posts.index')->
     // with('success','Posts created successfully.');
 
-    $allPosts= request()->all();
+    $allPosts= $request->all();
 
         $post->update($allPosts);
    
         // $post->update($request->all());
 
-        return redirect()->route('posts.index')
-        ->with('success','Product updated successfully');
+        return redirect()->route('posts.index');
+        
     
 
 
