@@ -40,3 +40,7 @@ Route::get('/posts/{postId}', [PostController::class, 'show'])->name('posts.show
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
