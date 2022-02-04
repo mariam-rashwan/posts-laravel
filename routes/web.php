@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,15 @@ Route::get('/posts/{postId}', [PostController::class, 'show'])->name('posts.show
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->stateless()->redirect();
+})->name('auth.github');
+Route::get('/auth/callback', function () {
+    // dd('dkfmkfm');
+
+    $user = Socialite::driver('github')->stateless()->user();
+
+dd($user);
+    // $user->token ->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
+});
