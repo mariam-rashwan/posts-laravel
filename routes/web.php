@@ -60,17 +60,17 @@ Route::get('/auth/callback', function () {
     // $user->token ->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
 });
 
-Route::get('/redirect', function () {
+Route::get('/google/redirect', function () {
     return Socialite::driver('google')->stateless()->redirect();
 })->name('auth.google');
-// Route::get('/callback', function () {
-//     // dd('dkfmkfm');
+Route::get('google/callback', function () {
+    // dd('dkfmkfm');
 
-//     $user = Socialite::driver('google')->stateless()->user();
+    $user = Socialite::driver('google')->stateless()->user();
 
-//     dd($user);
-//     // $user->token ->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
-// });
+    // dd($user);
+    // $user->token ->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
+});
 
 Route::get('/auth/callback', function () {
     $githubUser = Socialite::driver('github')->stateless()->user();
@@ -89,6 +89,31 @@ Route::get('/auth/callback', function () {
             'github_id' => $githubUser->id,
             'github_token' => $githubUser->token,
             'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    }
+
+    Auth::login($user);
+
+    return redirect()->route('posts.index');
+});
+
+Route::get('google/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    $user = User::where('google_id', $googleUser->id)->first();
+
+    if ($user) {
+        $user->update([
+            'google_token' => $googleUser->token,
+            'google_refresh_token' => $googleUser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $googleUser->nickname,
+            'email' => $googleUser->email,
+            'google_id' => $googleUser->id,
+            'google_token' => $googleUser->token,
+            'google_refresh_token' => $googleUser->refreshToken,
         ]);
     }
 

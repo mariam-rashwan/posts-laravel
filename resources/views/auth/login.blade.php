@@ -57,7 +57,7 @@
                                     {{ __('Login') }}
                                 </button>
                                  <a href="{{Route('auth.github')}}" class="btn btn-dark"> Login With GitHub</a>
-                                <a href="#"class="btn btn-danger"> Login With Google +</a>
+                                <a href="{{Route('auth.google')}}"class="btn btn-danger"> Login With Google +</a>
 
 
                                 @if (Route::has('password.request'))
