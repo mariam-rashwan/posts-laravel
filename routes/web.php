@@ -55,6 +55,20 @@ Route::get('/auth/callback', function () {
 
     $user = Socialite::driver('github')->stateless()->user();
 
-dd($user);
+    dd($user);
     // $user->token ->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
 });
+
+Route::get('/redirect', function () {
+    return Socialite::driver('google')->stateless()->redirect();
+})->name('auth.google');
+Route::get('/callback', function () {
+    // dd('dkfmkfm');
+
+    $user = Socialite::driver('google')->stateless()->user();
+
+    dd($user);
+    // $user->token ->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
+});
+
+

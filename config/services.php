@@ -35,6 +35,9 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => 'http://localhost:8000/auth/callback',
     ],
-    
-
+    'google' => [ 
+        'client_id' => env ('G+_CLIENT_ID'),
+        'client_secret' => env ('G+_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8000/callback/google',
+    ],
 ];
