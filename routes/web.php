@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Laravel\Socialite\Facades\Socialite;
-
+use App\Models\User;
+// use App\Http\Controllers\Auth\LoginController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,13 +63,36 @@ Route::get('/auth/callback', function () {
 Route::get('/redirect', function () {
     return Socialite::driver('google')->stateless()->redirect();
 })->name('auth.google');
-Route::get('/callback', function () {
-    // dd('dkfmkfm');
+// Route::get('/callback', function () {
+//     // dd('dkfmkfm');
 
-    $user = Socialite::driver('google')->stateless()->user();
+//     $user = Socialite::driver('google')->stateless()->user();
 
-    dd($user);
-    // $user->token ->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
+//     dd($user);
+//     // $user->token ->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
+// });
+
+Route::get('/auth/callback', function () {
+    $githubUser = Socialite::driver('github')->stateless()->user();
+
+    $user = User::where('github_id', $githubUser->id)->first();
+
+    if ($user) {
+        $user->update([
+            'github_token' => $githubUser->token,
+            'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $githubUser->nickname,
+            'email' => $githubUser->email,
+            'github_id' => $githubUser->id,
+            'github_token' => $githubUser->token,
+            'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    }
+
+    Auth::login($user);
+
+    return redirect()->route('posts.index');
 });
-
-
